@@ -58,8 +58,8 @@ const attachEventListeners = snake => {
   document.body.onkeydown = handleKeyPress.bind(null, snake);
 };
 
-const main = function () {
-  const snake = new Snake(
+const snakeInit = function () {
+  return new Snake(
     [
       [40, 25],
       [41, 25],
@@ -68,8 +68,10 @@ const main = function () {
     new Direction(EAST),
     'snake'
   );
+}
 
-  const ghostSnake = new Snake(
+const ghostSnakeInit = function () {
+  return new Snake(
     [
       [40, 30],
       [41, 30],
@@ -78,7 +80,11 @@ const main = function () {
     new Direction(SOUTH),
     'ghost'
   );
+}
 
+const main = function () {
+  const snake = snakeInit();
+  const ghostSnake = ghostSnakeInit();
   const food = new Food(5, 5);
 
   attachEventListeners(snake);
