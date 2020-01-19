@@ -25,34 +25,34 @@ const createGrids = function () {
   }
 };
 
-const drawFood = function (food) {
-  const [colId, rowId] = food.position;
+const drawFood = function (foodStatus) {
+  const [colId, rowId] = foodStatus.foodPosition;
   const cell = getCell(colId, rowId);
   cell.classList.add('food')
 }
 
-const eraseSnake = function (snake) {
-  let [colId, rowId] = snake.previousTail;
+const eraseSnake = function (snakeStatus) {
+  let [colId, rowId] = snakeStatus.previousTail;
   const cell = getCell(colId, rowId);
-  cell.classList.remove(snake.species);
+  cell.classList.remove(snakeStatus.species);
 };
 
-const drawSnake = function (snake) {
-  snake.location.forEach(([colId, rowId]) => {
+const drawSnake = function (snakeStatus) {
+  snakeStatus.location.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
-    cell.classList.add(snake.species);
+    cell.classList.add(snakeStatus.species);
   });
 };
 
 const draw = function (game) {
-  drawSnake(game.snake);
-  drawSnake(game.ghostSnake);
-  drawFood(game.food);
+  drawSnake(game.snakeStatus);
+  drawSnake(game.ghostSnakeStatus);
+  drawFood(game.foodStatus);
 }
 
 const erase = function (game) {
-  eraseSnake(game.snake);
-  eraseSnake(game.ghostSnake);
+  eraseSnake(game.snakeStatus);
+  eraseSnake(game.ghostSnakeStatus);
 }
 
 const handleKeyPress = game => {
@@ -122,5 +122,5 @@ const main = function () {
   const food = new Food(5, 5);
   const game = new Game(snake, ghostSnake, food);
   initialize(game);
-  setup(game)
+  setup(game);
 };
