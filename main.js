@@ -4,7 +4,7 @@ const NUM_OF_ROWS = 60;
 const GRID_ID = 'grid';
 
 const getGrid = () => document.getElementById(GRID_ID);
-const getCellId = (colId, rowId) => colId + '_' + rowId;
+const getCellId = (colId, rowId) => `${colId}_${rowId}`;
 
 const getCell = (colId, rowId) =>
   document.getElementById(getCellId(colId, rowId));
@@ -86,22 +86,23 @@ const main = function () {
   const snake = snakeInit();
   const ghostSnake = ghostSnakeInit();
   const food = new Food(5, 5);
+  const game = new Game(snake, ghostSnake, food);
 
-  attachEventListeners(snake);
+  attachEventListeners(game.snake);
   createGrids();
-  drawSnake(snake);
-  drawSnake(ghostSnake);
-  drawFood(food);
+  drawSnake(game.snake);
+  drawSnake(game.ghostSnake);
+  drawFood(game.food);
 
   setInterval(() => {
-    moveAndDrawSnake(snake);
-    moveAndDrawSnake(ghostSnake);
+    moveAndDrawSnake(game.snake);
+    moveAndDrawSnake(game.ghostSnake);
   }, 200);
 
   setInterval(() => {
     let x = Math.random() * 100;
     if (x > 50) {
-      ghostSnake.turnLeft();
+      game.ghostSnake.turnLeft();
     }
   }, 500);
 };
