@@ -4,4 +4,7 @@ class Game {
     this.ghostSnake = ghostSnake;
     this.food = food;
   }
+  turnSnakeLeft() {
+    return this.snake.turnLeft();
+  }
 }

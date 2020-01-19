@@ -44,8 +44,14 @@ const drawSnake = function (snake) {
   });
 };
 
-const handleKeyPress = snake => {
-  snake.turnLeft();
+const draw = function (game) {
+  drawSnake(game.snake);
+  drawSnake(game.ghostSnake);
+  drawFood(game.food);
+}
+
+const handleKeyPress = game => {
+  game.turnSnakeLeft();
 };
 
 const moveAndDrawSnake = function (snake) {
@@ -54,8 +60,8 @@ const moveAndDrawSnake = function (snake) {
   drawSnake(snake);
 };
 
-const attachEventListeners = snake => {
-  document.body.onkeydown = handleKeyPress.bind(null, snake);
+const attachEventListeners = game => {
+  document.body.onkeydown = handleKeyPress.bind(null, game);
 };
 
 const snakeInit = function () {
@@ -82,17 +88,18 @@ const ghostSnakeInit = function () {
   );
 }
 
+
+const setup = function (game) {
+  attachEventListeners(game);
+  createGrids();
+  draw(game);
+}
+
 const main = function () {
   const snake = snakeInit();
   const ghostSnake = ghostSnakeInit();
   const food = new Food(5, 5);
   const game = new Game(snake, ghostSnake, food);
-
-  attachEventListeners(game.snake);
-  createGrids();
-  drawSnake(game.snake);
-  drawSnake(game.ghostSnake);
-  drawFood(game.food);
 
   setInterval(() => {
     moveAndDrawSnake(game.snake);
@@ -105,4 +112,5 @@ const main = function () {
       game.ghostSnake.turnLeft();
     }
   }, 500);
+  setup(game)
 };
