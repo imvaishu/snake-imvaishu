@@ -25,6 +25,12 @@ const createGrids = function () {
   }
 };
 
+const drawFood = function (food) {
+  const [colId, rowId] = food.position;
+  const cell = getCell(colId, rowId);
+  cell.classList.add('food')
+}
+
 const eraseTail = function (snake) {
   let [colId, rowId] = snake.previousTail;
   const cell = getCell(colId, rowId);
@@ -73,10 +79,13 @@ const main = function () {
     'ghost'
   );
 
+  const food = new Food(5, 5);
+
   attachEventListeners(snake);
   createGrids();
   drawSnake(snake);
   drawSnake(ghostSnake);
+  drawFood(food);
 
   setInterval(() => {
     moveAndDrawSnake(snake);
