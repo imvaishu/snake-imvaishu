@@ -26,5 +26,16 @@ class Game {
   update() {
     this.snake.move();
     this.ghostSnake.move();
+    if (this.snake.hasEaten(this.food)) {
+      this.generateFood();
+      this.snake.increaseSnake();
+    }
+  }
+
+  generateFood() {
+    const colId = Math.floor(Math.random() * 100);
+    const rowId = Math.floor(Math.random() * 60);
+
+    this.food = new Food(colId, rowId);
   }
 }

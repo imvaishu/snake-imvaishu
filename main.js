@@ -31,6 +31,12 @@ const drawFood = function (foodStatus) {
   cell.classList.add('food')
 }
 
+const eraseFood = function (foodStatus) {
+  const [colId, rowId] = foodStatus.foodPosition;
+  const cell = getCell(colId, rowId);
+  cell.classList.remove('food')
+}
+
 const eraseSnake = function (snakeStatus) {
   let [colId, rowId] = snakeStatus.previousTail;
   const cell = getCell(colId, rowId);
@@ -53,6 +59,7 @@ const draw = function (game) {
 const erase = function (game) {
   eraseSnake(game.snakeStatus);
   eraseSnake(game.ghostSnakeStatus);
+  eraseFood(game.foodStatus);
 }
 
 const handleKeyPress = game => {
@@ -67,6 +74,7 @@ const setup = function (game) {
   attachEventListeners(game);
   createGrids();
   draw(game);
+  initialize(game);
 }
 
 const drawAndUpdate = function (game) {
@@ -121,6 +129,5 @@ const main = function () {
   const ghostSnake = ghostSnakeInit();
   const food = new Food(5, 5);
   const game = new Game(snake, ghostSnake, food);
-  initialize(game);
   setup(game);
 };

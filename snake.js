@@ -27,5 +27,15 @@ class Snake {
 
     this.positions.push([headX + deltaX, headY + deltaY]);
   }
+
+  hasEaten(food) {
+    const [colId, rowId] = food.position;
+    const [headX, headY] = this.positions[this.positions.length - 1];
+    return headX === colId && headY === rowId;
+  }
+
+  increaseSnake() {
+    this.positions.unshift(this.previousTail);
+  }
 }
 
