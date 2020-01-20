@@ -78,8 +78,9 @@ const setup = function (game) {
 }
 
 const drawAndUpdate = function (game) {
-  erase(game);
+  eraseFood(game.foodStatus)
   game.update();
+  erase(game);
   draw(game);
 }
 
