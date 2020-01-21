@@ -25,6 +25,11 @@ const createGrids = function () {
   }
 };
 
+const displayScore = function (score) {
+  const totalScore = document.getElementById('score');
+  totalScore.innerText = score;
+}
+
 const drawFood = function (foodStatus) {
   const [colId, rowId] = foodStatus.foodPosition;
   const cell = getCell(colId, rowId);
@@ -54,6 +59,7 @@ const draw = function (game) {
   drawSnake(game.snakeStatus);
   drawSnake(game.ghostSnakeStatus);
   drawFood(game.foodStatus);
+  displayScore(game.score);
 }
 
 const erase = function (game) {
@@ -128,7 +134,7 @@ const ghostSnakeInit = function () {
 const main = function () {
   const snake = snakeInit();
   const ghostSnake = ghostSnakeInit();
-  const food = new Food(5, 5);
+  const food = new Food([5, 5], 'food');
   const game = new Game(snake, ghostSnake, food);
   setup(game);
 };

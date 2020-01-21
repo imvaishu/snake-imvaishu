@@ -28,3 +28,7 @@ h1 {
 .food{
   background-color: rgb(168, 168, 255);
 }
+
+#score{
+  font-size: 30px;
+}

@@ -1,10 +1,19 @@
+const points = {
+  food: 1
+}
+
 class Food {
-  constructor(colId, rowId) {
-    this.colId = colId;
-    this.rowId = rowId;
+  constructor(location, type) {
+    this.location = location.slice();
+    this.type = type;
   }
 
   get position() {
-    return [this.colId, this.rowId];
+    return {
+      location: this.location.slice(),
+      type: this.type,
+      point: points[this.type]
+    }
   }
+
 }

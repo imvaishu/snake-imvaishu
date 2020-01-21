@@ -29,7 +29,7 @@ class Snake {
   }
 
   hasEaten(food) {
-    const [colId, rowId] = food.position;
+    const [colId, rowId] = food.position.location;
     const [headX, headY] = this.positions[this.positions.length - 1];
     return headX === colId && headY === rowId;
   }
