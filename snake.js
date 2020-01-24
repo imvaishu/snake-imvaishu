@@ -1,3 +1,5 @@
+const wall = { numOfCols: 100, numOfRows: 60 };
+
 class Snake {
   constructor(positions, direction, type) {
     this.positions = positions.slice();
@@ -53,6 +55,12 @@ class Snake {
     return snake.status.location.some(([colId, rowId]) => {
       return headX === colId && headY === rowId;
     })
+  }
+
+  hasTouchedToWall() {
+    const [headX, headY] = this.positions[this.positions.length - 1];
+
+    return headX < 0 || headX >= wall.numOfCols || headY < 0 || headY >= wall.numOfRows;
   }
 }
 
