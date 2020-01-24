@@ -25,6 +25,12 @@ const createGrids = function () {
   }
 };
 
+const displayResult = function (score) {
+  const container = document.getElementsByClassName('result')[0];
+  const resultMessage = '<div><h1 class="gameOver">Game Over</h1><nav class="score">Score: ' + score + '</nav><button onclick="window.location.reload();" class="button">Restart Game</button></div>';
+  container.innerHTML = resultMessage;
+}
+
 const displayScore = function (score) {
   const totalScore = document.getElementById('score');
   totalScore.innerText = score;
@@ -83,10 +89,16 @@ const setup = function (game) {
   initialize(game);
 }
 
-const drawAndUpdate = function (game) {
+const drawAndUpdate = function (game, ghostInterval, snakeInterval) {
   eraseFood(game.foodStatus)
   game.update();
   erase(game);
+  if (game.isOver()) {
+    displayResult(game.score);
+    clearInterval(ghostInterval);
+    clearInterval(snakeInterval);
+    return;
+  }
   draw(game);
 }
 
@@ -98,13 +110,13 @@ const moveGhostSnake = function (game) {
 };
 
 const initialize = function (game) {
-  setInterval(() => {
-    drawAndUpdate(game);
-  }, 200);
-
-  setInterval(() => {
+  const ghostInterval = setInterval(() => {
     moveGhostSnake(game);
   }, 500);
+
+  const snakeInterval = setInterval(() => {
+    drawAndUpdate(game, ghostInterval, snakeInterval);
+  }, 200);
 }
 
 const snakeInit = function () {

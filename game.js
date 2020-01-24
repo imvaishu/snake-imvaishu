@@ -46,4 +46,8 @@ class Game {
 
     this.food = new Food([colId, rowId], 'food');
   }
+
+  isOver() {
+    return this.snake.hasTouchedItself();
+  }
 }

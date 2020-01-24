@@ -37,5 +37,14 @@ class Snake {
   increaseSnake() {
     this.positions.unshift(this.previousTail);
   }
+
+  hasTouchedItself() {
+    const [headX, headY] = this.positions[this.positions.length - 1];
+    const parts = this.positions.slice(0, this.positions.length - 2);
+
+    return parts.some(([colId, rowId]) => {
+      return headX === colId && headY === rowId;
+    })
+  }
 }
 
