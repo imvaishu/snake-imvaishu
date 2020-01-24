@@ -46,5 +46,13 @@ class Snake {
       return headX === colId && headY === rowId;
     })
   }
+
+  hasTouchedOther(snake) {
+    const [headX, headY] = this.positions[this.positions.length - 1];
+
+    return snake.status.location.some(([colId, rowId]) => {
+      return headX === colId && headY === rowId;
+    })
+  }
 }
 

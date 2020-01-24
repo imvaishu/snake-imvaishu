@@ -48,6 +48,6 @@ class Game {
   }
 
   isOver() {
-    return this.snake.hasTouchedItself();
+    return this.snake.hasTouchedItself() || this.snake.hasTouchedOther(this.ghostSnake);
   }
 }
